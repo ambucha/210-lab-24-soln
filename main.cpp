@@ -32,8 +32,11 @@ void avg_age(const list<Goat> &trip);
 // reverse_trip(): reverses the order of the list of goats
 void reverse_trip(list<Goat> &trip);
 
-// replace_ages(): replaces goat ages of given age to a new age also given by user
+// replace_goat(): replaces the entire goat
 void replace_goat(list<Goat> &trip);
+
+// find_goat(): finds the goat by the given name
+void find_goat(const list<Goat> &trip);
 
 int main() {
     srand(time(0));
@@ -66,7 +69,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 8) {
+    while (sel != 9) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -98,6 +101,10 @@ int main() {
                 cout << "Replacing goat.\n";
                 replace_goat(trip);
                 break;
+            case 8:
+                cout << "Searching for goat.\n";
+                find_goat(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -114,6 +121,7 @@ int main_menu() {
     // for milestone 2 imma use accumulate to find the avg age
     // milestone 3 will be just reversing the trip order
     // milestone 4 will use replace to replace the ages of goats with given age (gonna change this to replcing the whole goat)
+    // milestone 5 will be find, so i will find the goat by its given name and otehr data, since i alr made the operator== in goat.h may as well use it again
     cout << "*** GOAT MANAGER 3001 ***\n";
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
@@ -122,11 +130,12 @@ int main_menu() {
     cout << "[5] Display average age" << endl;
     cout << "[6] Reverse trip order" << endl;
     cout << "[7] Replace goat" << endl;
-    cout << "[8] Quit\n";
+    cout << "[8] Find goat" << endl;
+    cout << "[9] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 8) {
+    while (choice < 1 || choice > 9) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -272,4 +281,27 @@ void replace_goat(list<Goat> &trip){
 
     cout << "Goat replaced, new trip:" << endl;
     display_trip(trip);
+}
+
+void find_goat(const list<Goat> &trip){
+    // first check if the list is empty
+    if(trip.empty()){
+        cout << "Trip is empty" << endl;
+        return;
+    }
+
+    // variables to search for
+    string name;
+    string color;
+    int age;
+
+    // prompt user
+    cout << "Enter goat's name: ";
+    cin >> name;
+    cout << "Enter goat's age: ";
+    cin >> age;
+    cout << "Enter goat's color: ";
+    cin >> color;
+
+    
 }
