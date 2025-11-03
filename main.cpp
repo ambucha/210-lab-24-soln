@@ -211,3 +211,15 @@ void avg_age(const list<Goat> &trip){
     cout << fixed << setprecision(3) << "Average age: " << avg << " years" << endl;
 }
 
+void reverse_trip(list<Goat> &trip){
+    // check if list has atleast two goats
+    if(trip.size() < 2){
+        cout << "Add more goats before trying to reverse" << endl;
+        return;
+    }
+
+    //reverse the trip then display the new order
+    reverse(trip.begin(),trip.end());
+    cout << "Trip reversed:" << endl;
+    display_trip(trip);
+}
