@@ -7,6 +7,8 @@
 #include <iomanip>
 #include <algorithm>
 #include <list>
+// need to include numeric for the accumulate
+#include <numeric>
 #include "Goat.h"
 using namespace std;
 
@@ -189,10 +191,14 @@ void avg_age(const list<Goat> &trip){
     }
 
     // use accumulate to get the sum of the goats ages
-    int sum = accumulate(trip.begin(), trip.end(), 0);
+    // i need to pull get age for each goat, similar to how it was done in any_of
+    int sum = accumulate(trip.begin(), trip.end(), 0,[](int a, const Goat &g){return a + g.get_age();});
 
     // now calculate the average of these ages, divide sum by the trip size
-    double avg = sum / trip.size();
-    
+    // need to add (double) in front of sum to avoid integer division
+    double avg = (double) sum / trip.size();
+
+    // imma set precision to three here
+    cout << fixed << setprecision(3) << "Average age: " << avg << " years" << endl;
 
 }
