@@ -41,6 +41,9 @@ void find_goat(const list<Goat> &trip);
 // clear_trip(): clears the list of goats
 void clear_trip(list<Goat> &trip);
 
+// paint_goats(): changes goats colors to given color
+void paint_goats(list<Goat> &trip);
+
 int main() {
     srand(time(0));
     bool again;
@@ -72,7 +75,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 10) {
+    while (sel != 11) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -112,6 +115,10 @@ int main() {
                 cout << "Clearing the trip.\n";
                 clear_trip(trip);
                 break;
+            case 10:
+                cout << "Painting goats.\n";
+                paint_goats(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -130,6 +137,7 @@ int main_menu() {
     // milestone 4 will use replace to replace the ages of goats with given age (gonna change this to replcing the whole goat)
     // milestone 5 will be find, so i will find the goat by its given name and otehr data, since i alr made the operator== in goat.h may as well use it again
     // milestone 6 will be clearing the trip
+    //milestone 7 will be using fill to change all goats color
     cout << "*** GOAT MANAGER 3001 ***\n";
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
@@ -140,11 +148,12 @@ int main_menu() {
     cout << "[7] Replace goat" << endl;
     cout << "[8] Find goat" << endl;
     cout << "[9] Clear the trip" << endl;
-    cout << "[10] Quit\n";
+    cout << "[10] Paint goats" << endl;
+    cout << "[11] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 10) {
+    while (choice < 1 || choice > 11) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -330,7 +339,27 @@ void clear_trip(list<Goat> &trip){
         return;
     }
 
+    // use .clear()
     trip.clear();
 
     cout << "Goats removed from the trip. New trip size: " << trip.size() << endl;
+}
+
+void paint_goats(list<Goat> &trip){
+    // first check if the list is empty
+    if(trip.empty()){
+        cout << "Trip is empty" << endl;
+        return;
+    }
+
+    // prompt for new color to paint the goats, i want to demonstrate fill usage so in reality im gonna make all the goats lose their name and age, and set their color to the new color
+    string newColor;
+    cout << "Enter color to paint goats: ";
+    cin >> newColor;
+
+    // not ideal for painting the goats cus i am kind of erasing them and changing their color but i just want to demonstrate fill usage so its fine
+    Goat gNew("", 0, newColor);
+
+    fill(trip.begin(),trip.end(),gNew);
+    cout << "All goats are now " << newColor << endl;
 }
