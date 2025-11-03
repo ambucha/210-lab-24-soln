@@ -9,6 +9,8 @@
 #include <list>
 // need to include numeric for the accumulate
 #include <numeric>
+// include rnaodm for the shuffle
+#include <random>
 #include "Goat.h"
 using namespace std;
 
@@ -44,6 +46,9 @@ void clear_trip(list<Goat> &trip);
 // paint_goats(): changes goats colors to given color
 void paint_goats(list<Goat> &trip);
 
+// shuffle_trip(): changes order of the goats
+void shuffle_trip(list<Goat> &trip);
+
 int main() {
     srand(time(0));
     bool again;
@@ -75,7 +80,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 11) {
+    while (sel != 12) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -119,6 +124,10 @@ int main() {
                 cout << "Painting goats.\n";
                 paint_goats(trip);
                 break;
+            case 11:
+                cout << "Shuffling the goats.\n";
+                shuffle_trip(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -138,6 +147,7 @@ int main_menu() {
     // milestone 5 will be find, so i will find the goat by its given name and otehr data, since i alr made the operator== in goat.h may as well use it again
     // milestone 6 will be clearing the trip
     //milestone 7 will be using fill to change all goats color
+    // last mielstone will just be shuffling the trip
     cout << "*** GOAT MANAGER 3001 ***\n";
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
@@ -149,11 +159,12 @@ int main_menu() {
     cout << "[8] Find goat" << endl;
     cout << "[9] Clear the trip" << endl;
     cout << "[10] Paint goats" << endl;
-    cout << "[11] Quit\n";
+    cout << "[11] Shuffle the trip" << endl;
+    cout << "[12] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 11) {
+    while (choice < 1 || choice > 12) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -362,4 +373,17 @@ void paint_goats(list<Goat> &trip){
 
     fill(trip.begin(),trip.end(),gNew);
     cout << "All goats are now " << newColor << endl;
+}
+
+void shuffle_trip(list<Goat> &trip){
+    // check if list has atleast two goats
+    if(trip.size() < 2){
+        cout << "Add more goats before trying to shuffle" << endl;
+        return;
+    }
+
+    // shuffle the goats
+    shuffle(trip.begin(),trip.end(), default_random_engine());
+    cout << "Goats were shuffled:" << endl;
+    display_trip(trip);
 }
