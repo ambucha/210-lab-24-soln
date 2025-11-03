@@ -383,7 +383,18 @@ void shuffle_trip(list<Goat> &trip){
     }
 
     // shuffle the goats
-    shuffle(trip.begin(),trip.end(), default_random_engine());
+    // getting errors with the shuffle looks like it doesnt work if it is a list, gonna make it a vecotr then put it back into the list post shuffle
+    vector<Goat> tempTrip(trip.begin(),trip.end());
+
+    shuffle(tempTrip.begin(),tempTrip.end(), default_random_engine());
+
+    //clear the old list and put the shuffled one bnack into it
+    trip.clear();
+    // use a for loop to push_back the values into the original list
+    for(const Goat &g : tempTrip){
+        trip.push_back(g);
+    }
+
     cout << "Goats were shuffled:" << endl;
     display_trip(trip);
 }
