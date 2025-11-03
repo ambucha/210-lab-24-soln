@@ -29,6 +29,9 @@ void age_check(const list<Goat> &trip);
 // avg_age(): calculates average age of the trip using accumulate
 void avg_age(const list<Goat> &trip);
 
+// reverse_trip(): reverses the order of the list of goats
+void reverse_trip(list <Goat> &trip);
+
 int main() {
     srand(time(0));
     bool again;
@@ -60,7 +63,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 6) {
+    while (sel != 7) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -84,6 +87,10 @@ int main() {
                 cout << "Showing average age.\n";
                 avg_age(trip);
                 break;
+            case 6:
+                cout << "Reversing the order of the trip.\n";
+                reverse_trip(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -98,17 +105,19 @@ int main() {
 int main_menu() {
     // to start I will add a new option to check goat ages, so imma use any_of for my milestone 1 algorithm
     // for milestone 2 imma use accumulate to find the avg age
+    // milestone 3 will be just reversing the trip order
     cout << "*** GOAT MANAGER 3001 ***\n";
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
     cout << "[4] Check if any goat is given age" << endl;
     cout << "[5] Display average age" << endl;
-    cout << "[6] Quit\n";
+    cout << "[6] Reverse trip order" << endl;
+    cout << "[7] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 6) {
+    while (choice < 1 || choice > 7) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -200,5 +209,5 @@ void avg_age(const list<Goat> &trip){
 
     // imma set precision to three here
     cout << fixed << setprecision(3) << "Average age: " << avg << " years" << endl;
-
 }
+
