@@ -29,8 +29,9 @@ public:
     }
 
     // making this for my replace functino to be able to compare ages
+    // i need to compare the whole goat actually
     bool operator ==(const Goat &other) const{
-        return age == other.age;
+        return age == other.age && name == other.name && color == other.color;
     }
 };
 
