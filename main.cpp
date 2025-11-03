@@ -241,12 +241,13 @@ void replace_goat(list<Goat> &trip){
     }
 
     // vars for old and new ages, and old namesold colors and new names nad colors
+    // oopsi copy pasted the variable and made them all ints
     int oldAge;
     int newAge;
-    int oldColor;
-    int newColor;
-    int oldName;
-    int newName;
+    string oldColor;
+    string newColor;
+    string oldName;
+    string newName;
 
     // prompt for ages
     cout << "Enter name of goat to replace: ";
@@ -269,5 +270,6 @@ void replace_goat(list<Goat> &trip){
     // imma need to change this since replace replaces the entire element with just the age, so now imma need to change this to be more specific, you haveto give everything about the goat and fully replace it
     replace(trip.begin(), trip.end(), Goat(oldName, oldAge, oldColor), Goat(newName, newAge, newColor));
 
-    cout << "Goats who were " << old << " are now " << age << endl;
+    cout << "Goat replaced, new trip:" << endl;
+    display_trip(trip);
 }
