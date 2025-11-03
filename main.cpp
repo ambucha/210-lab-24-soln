@@ -19,7 +19,10 @@ void display_trip(list<Goat> trip);
 int main_menu();
 
 // function prototype for goat age check
-void age_check(list<Goat> &trip);
+// age_checlk(): checks if any goat is at the given age
+// arguments: i shoudl use a const here to be honest since i dont want to modify the list
+// returns: nothing
+void age_check(const list<Goat> &trip);
 
 int main() {
     srand(time(0));
@@ -66,9 +69,12 @@ int main() {
                 cout << "Displaying goat data.\n";
                 display_trip(trip);
                 break;
-            case 6:
+            // oops i accidentally wrote 6 here should be 4
+            case 4:
                 cout << "Checking for goats who are given age.\n";
                 age_check(trip);
+                // i was missing break here
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -133,14 +139,16 @@ int select_goat(list<Goat> trp) {
     display_trip(trp);
     cout << "Choice --> ";
     cin >> input;
-    while (input < 1 or input > trp.size()) {
+
+    // was getting an error with the or here had to change it to ||
+    while (input < 1 || input > trp.size()) {
         cout << "Invalid choice, again --> ";
         cin >> input;
     }
     return input;
 }
 
-void age_check(list<Goat> &trip){
+void age_check(const list<Goat> &trip){
     // first check if the list is empty
     if(trip.empty()){
         cout << "Trip is empty" << endl;
@@ -152,6 +160,14 @@ void age_check(list<Goat> &trip){
     cout << "Enter age: ";
     cin >> age;
 
-    
+    // i was having trouble with the variable to put instead of 'int score' in the lesson notes, but i think i got it
+    // i needed to make the [] into [&] in order for the age to be checked with the given age
+    bool ageCheck = any_of(trip.begin(), trip.end(), [&](const Goat &g) { return g.get_age() == age; });
 
+    if(ageCheck){
+        cout << "Yes, there is a goat who is " << age << " years old" << endl;
+    }
+    else {
+        cout << "No goat is " << age << " years old" << endl;
+    }
 }
