@@ -303,5 +303,13 @@ void find_goat(const list<Goat> &trip){
     cout << "Enter goat's color: ";
     cin >> color;
 
-    
+    // make a goat to use for searching
+    Goat x(name,age,color);
+    auto it = find(trip.begin(),trip.end(), x);
+    if(it != trip.end()){
+        cout << "Goat found" << endl;
+    } 
+    else {
+        cout << "Goat not found" << endl;
+    }
 }
