@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <algorithm>
 #include <list>
 #include "Goat.h"
 using namespace std;
