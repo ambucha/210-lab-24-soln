@@ -30,7 +30,10 @@ void age_check(const list<Goat> &trip);
 void avg_age(const list<Goat> &trip);
 
 // reverse_trip(): reverses the order of the list of goats
-void reverse_trip(list <Goat> &trip);
+void reverse_trip(list<Goat> &trip);
+
+// replace_ages(): replaces goat ages of given age to a new age also given by user
+void replace_age(list<Goat> &trip);
 
 int main() {
     srand(time(0));
@@ -91,6 +94,10 @@ int main() {
                 cout << "Reversing the order of the trip.\n";
                 reverse_trip(trip);
                 break;
+            case 7:
+                cout << "Replacing ages.\n";
+                replace_ages(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -106,6 +113,7 @@ int main_menu() {
     // to start I will add a new option to check goat ages, so imma use any_of for my milestone 1 algorithm
     // for milestone 2 imma use accumulate to find the avg age
     // milestone 3 will be just reversing the trip order
+    // milestone 4 will use replace to replace the ages of goats with given age
     cout << "*** GOAT MANAGER 3001 ***\n";
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
@@ -113,11 +121,12 @@ int main_menu() {
     cout << "[4] Check if any goat is given age" << endl;
     cout << "[5] Display average age" << endl;
     cout << "[6] Reverse trip order" << endl;
-    cout << "[7] Quit\n";
+    cout << "[7] Replace ages of goats at given age" << endl;
+    cout << "[8] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 7) {
+    while (choice < 1 || choice > 8) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -222,4 +231,25 @@ void reverse_trip(list<Goat> &trip){
     reverse(trip.begin(),trip.end());
     cout << "Trip reversed:" << endl;
     display_trip(trip);
+}
+
+void replace_age(list<Goat> &trip){
+     // first check if the list is empty
+    if(trip.empty()){
+        cout << "Trip is empty" << endl;
+        return;
+    }
+
+    // vars for old and new ages
+    int old;
+    int age;
+
+    // prompt for ages
+    cout << "Enter age to replace: ";
+    cin >> old;
+    cout << "Enter new age: ";
+    cin >> age;
+
+    // use replace, imma need to set something up in Goat.h in order to compare elements
+    replace(trip.begin(), trip.end(), 0, -1);
 }

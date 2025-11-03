@@ -27,6 +27,11 @@ public:
     bool operator< (const Goat &other) const {
         return name < other.name;
     }
+
+    // making this for my replace functino to be able to compare ages
+    bool operator ==(const Goat &other) const{
+        return age == other.age;
+    }
 };
 
 #endif
