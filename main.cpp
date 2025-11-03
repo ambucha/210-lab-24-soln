@@ -24,6 +24,9 @@ int main_menu();
 // returns: nothing
 void age_check(const list<Goat> &trip);
 
+// avg_age(): calculates average age of the trip using accumulate
+void avg_age(const list<Goat> &trip);
+
 int main() {
     srand(time(0));
     bool again;
@@ -55,7 +58,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 5) {
+    while (sel != 6) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -75,6 +78,10 @@ int main() {
                 age_check(trip);
                 // i was missing break here
                 break;
+            case 5:
+                cout << "Showing average age.\n";
+                avg_age(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -88,16 +95,18 @@ int main() {
 
 int main_menu() {
     // to start I will add a new option to check goat ages, so imma use any_of for my milestone 1 algorithm
+    // for milestone 2 imma use accumulate to find the avg age
     cout << "*** GOAT MANAGER 3001 ***\n";
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
     cout << "[4] Check if any goat is given age" << endl;
-    cout << "[5] Quit\n";
+    cout << "[5] Display average age" << endl;
+    cout << "[6] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 5) {
+    while (choice < 1 || choice > 6) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -170,4 +179,20 @@ void age_check(const list<Goat> &trip){
     else {
         cout << "No goat is " << age << " years old" << endl;
     }
+}
+
+void avg_age(const list<Goat> &trip){
+    // first check if the list is empty
+    if(trip.empty()){
+        cout << "Trip is empty" << endl;
+        return;
+    }
+
+    // use accumulate to get the sum of the goats ages
+    int sum = accumulate(trip.begin(), trip.end(), 0);
+
+    // now calculate the average of these ages, divide sum by the trip size
+    double avg = sum / trip.size();
+    
+
 }
